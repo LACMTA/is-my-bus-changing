@@ -10,3 +10,30 @@ This tool will be under continuous development to better communicate service cha
 
 Love,
 the Metro team
+
+
+## Change Categories
+
+Make these changes to add a new change category.
+
+In the Google Sheet:
+
+* Add a new column of checkboxes and give it a relevant column header.
+
+In `bus.js`:
+
+* Reference the new column in the `hasChanges` function's conditional statement.
+* Add an entry to the `MESSAGES` constant for the message that will show up in the _Key Changes_ box.
+* Add a condition to display the new message in the `showChanges` function.
+
+## Lines
+
+Make these changes to modify the lines listed.
+
+In the Google Sheet:
+
+* Add or remove rows using the `Line Number` to match against. Include the `Line Description` column.
+
+In `home.js`:
+
+* Update the `currentLines` array for the `Line Number`.  The Line Number is what will be displayed in the autocomplete list and is what will be used to match against the Google Sheet entries.
