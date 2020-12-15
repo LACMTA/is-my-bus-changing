@@ -11,8 +11,11 @@ const MESSAGES = {
   is_back: "Line is back in service",
   discontinued: "Line discontinued",
   remains_suspended: "Service remains suspended",
-  line_number_changed: "Line number changed"
+  line_number_changed: "Line number changed",
+  map_changes: "Map changes",
+  trip_time_chnages: "Trip times changed or extended"
 };
+
 let shakeupData = {};
 let AJAX = [];
 const queryString = window.location.search;
@@ -77,7 +80,9 @@ function hasChanges(data, countDiscontinued) {
       data.gsx$startorendpointchanges.$t == "TRUE" ||
       data.gsx$latenightservicechanges.$t == "TRUE" ||
       data.gsx$lineisback.$t == "TRUE" ||
-      data.gsx$linenumberchanged.$t == "TRUE"){
+      data.gsx$linenumberchanged.$t == "TRUE" || 
+      data.gsx$mapchanges.$t == "TRUE" ||
+      data.gsx$triptimechanges.$t == "TRUE"){
     return true;
   }
 
@@ -121,8 +126,16 @@ function showChanges(data) {
         $('#changeList ul').append('<li class="my-4">' + MESSAGES.is_back + '</li>');
       }
 
-      if (data.gsx$linenumberchanged.$t == "TRUE") { /* Line is back */
+      if (data.gsx$linenumberchanged.$t == "TRUE") { /* Line number changed */
         $('#changeList ul').append('<li class="my-4">' + MESSAGES.line_number_changed + '</li>');
+      }
+
+      if (data.gsx$mapchanges.$t == "TRUE") { /* Map changes */
+        $('#changeList ul').append('<li class="my-4">' + MESSAGES.map_changes + '</li>');
+      }
+
+      if (data.gsx$triptimechanges.$t == "TRUE") { /* Trip times changed or extended */
+        $('#changeList ul').append('<li class="my-4">' + MESSAGES.trip_time_chnages + '</li>');
       }
     }
     
